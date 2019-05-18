@@ -10,9 +10,8 @@ module.exports = {
 }
 
 function get(req, res) {
-    // removendo o cache do require para nao trazer informacoes antigas
+    // removendo o cache do require
     delete require.cache[require.resolve('./carrinho.json')];
-    delete require.cache[require.resolve('../produto/produto.json')];
 
     const carrinho = require("./carrinho.json"),
         produtos = require("../produto/produto.json"),
@@ -43,10 +42,6 @@ function get(req, res) {
 }
 
 function create(req, res) {
-    // removendo o cache do require para nao trazer informacoes antigas
-    delete require.cache[require.resolve('./carrinho.json')];
-    delete require.cache[require.resolve('../produto/produto.json')];
-
     const carrinho = require("./carrinho.json"),
         produtos = require("../produto/produto.json");
         
@@ -70,9 +65,6 @@ function create(req, res) {
 }
 
 function update(req, res) {
-    // removendo o cache do require para nao trazer informacoes antigas
-    delete require.cache[require.resolve('./carrinho.json')];
-
     const carrinho = require("./carrinho.json");
 
     carrinho.forEach((c, i) => {
@@ -86,10 +78,6 @@ function update(req, res) {
 }
 
 function removeById(req, res) {
-    // removendo o cache do require para nao trazer informacoes antigas
-    delete require.cache[require.resolve('./carrinho.json')];
-    delete require.cache[require.resolve('../produto/produto.json')];
-
     const carrinho = require("./carrinho.json"),
         produtos = require("../produto/produto.json");
 
@@ -113,9 +101,6 @@ function removeById(req, res) {
 
 function removeAll(req, res) {
     writefile('carrinho', []);
-
-    // removendo o cache do require para nao trazer informacoes antigas
-    delete require.cache[require.resolve('../produto/produto.json')];
 
     // resetando o status padrao dos produtos
     const produtos = require("../produto/produto.json");

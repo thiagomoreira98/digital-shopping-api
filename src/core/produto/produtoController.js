@@ -5,7 +5,7 @@ module.exports = {
     getById,
     create,
     update,
-    remove,
+    removeById,
     removeAll
 }
 
@@ -66,8 +66,9 @@ function update(req, res) {
     res.ok();
 }
 
-function remove(req, res) {
-    const produtos = require('./produto.json');
+function removeById(req, res) {
+    const produtos = require('./produto.json'),
+        carrinho = require('../carrinho/carrinho.json');
 
     produtos.forEach((p, i) => {
         if (p.id == req.params.id) {
@@ -76,7 +77,14 @@ function remove(req, res) {
         }
     });
 
-    res.ok();
+    carrinho.forEach((c, i) => {
+        if (c.idProduto == req.params.id) {
+            carrinho.splice(i, 1);
+            writefile('carrinho', carrinho);
+        }
+    });
+
+    res.ok(produtos);
 }
 
 function removeAll(req, res) {

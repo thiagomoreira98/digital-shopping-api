@@ -10,5 +10,5 @@ module.exports = (app) => {
     app.route('/api/produtos/:id')
         .get(controller.getById)
         .put(controller.update)
-        .delete(controller.remove);
+        .delete(controller.removeById);
 }

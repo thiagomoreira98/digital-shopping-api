@@ -8,6 +8,6 @@ module.exports = (app) => {
 
     app.route('/api/produtos/:id')
         .get(controller.getById)
-        .post(controller.update)
+        .put(controller.update)
         .delete(controller.remove);
 }

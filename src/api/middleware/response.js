@@ -5,7 +5,11 @@ module.exports = (req, res, next) => {
             return res.status(status || 200).json({ message: content });
         }
 
-        res.status(status || 200).json(content);
+        res.status(status || 200).json({ content });
+    }
+
+    res.notFound = () => {
+        res.status(404).json({ message: 'Recurso nao encontrado' });
     }
 
     res.error = (message, status) => {

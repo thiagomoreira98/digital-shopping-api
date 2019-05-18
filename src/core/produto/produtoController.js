@@ -10,6 +10,9 @@ module.exports = {
 }
 
 function getAll(req, res) {
+    // removendo o cache do require
+    delete require.cache[require.resolve('./produto.json')];
+
     const produtos = require('./produto.json'),
         categorias = require('../categoria/categoria.json');
 

@@ -10,6 +10,9 @@ module.exports = {
 }
 
 function getAll(req, res) {
+    // removendo o cache do require para nao trazer informacoes antigas
+    delete require.cache[require.resolve('./produto.json')];
+
     const produtos = require('./produto.json'),
         categorias = require('../categoria/categoria.json');
 
@@ -28,6 +31,9 @@ function getAll(req, res) {
 }
 
 function getById(req, res) {
+    // removendo o cache do require para nao trazer informacoes antigas
+    delete require.cache[require.resolve('./produto.json')];
+
     const produtos = require('./produto.json');
     const result = produtos.find(p => p.id == req.params.id);
 
@@ -38,6 +44,9 @@ function getById(req, res) {
 }
 
 function create(req, res) {
+    // removendo o cache do require para nao trazer informacoes antigas
+    delete require.cache[require.resolve('./produto.json')];
+
     const produtos = require('./produto.json');
 
     const produto = {
@@ -54,6 +63,9 @@ function create(req, res) {
 }
 
 function update(req, res) {
+    // removendo o cache do require para nao trazer informacoes antigas
+    delete require.cache[require.resolve('./produto.json')];
+
     const produtos = require('./produto.json');
 
     produtos.forEach((p, i) => {
@@ -67,6 +79,10 @@ function update(req, res) {
 }
 
 function removeById(req, res) {
+    // removendo o cache do require para nao trazer informacoes antigas
+    delete require.cache[require.resolve('./produto.json')];
+    delete require.cache[require.resolve('../carinho/carrinho.json')];
+
     const produtos = require('./produto.json'),
         carrinho = require('../carrinho/carrinho.json');
 

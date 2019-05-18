@@ -19,6 +19,7 @@ function get(req, res) {
         produtos.forEach(p => {
             if (item.idProduto == p.id) {
                 item.nomeProduto = p.nome;
+                item.quantidade = p.quantidade;
                 item.idCategoria = p.idCategoria;
             }
         });
@@ -28,11 +29,9 @@ function get(req, res) {
                 item.nomeCategoria = cat.nome;
             }
         })
-
-        return item;
     });
 
-    let result = carrinho.lenth ?
+    let result = carrinho.length ?
         carrinho.filter(item => item.nomeProduto.includes(req.query.nomeProduto || '')) :
         [];
         

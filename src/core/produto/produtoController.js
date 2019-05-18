@@ -5,7 +5,8 @@ module.exports = {
     getById,
     create,
     update,
-    remove
+    remove,
+    removeAll
 }
 
 function getAll(req, res) {
@@ -17,7 +18,7 @@ function getAll(req, res) {
     // inner join
     result.forEach(prod => {
         categorias.forEach(cat => {
-            if(prod.idCategoria == cat.id) {
+            if (prod.idCategoria == cat.id) {
                 prod.nomeCategoria = cat.nome;
             }
         });
@@ -30,7 +31,7 @@ function getById(req, res) {
     const produtos = require('./produto.json');
     const result = produtos.find(p => p.id == req.params.id);
 
-    if(!result)
+    if (!result)
         return res.notFound();
 
     res.ok(result);
@@ -48,7 +49,7 @@ function create(req, res) {
     };
 
     produtos.push(produto);
-    
+
     res.ok();
 }
 
@@ -56,7 +57,7 @@ function update(req, res) {
     const produtos = require('./produto.json');
 
     produtos.forEach((p, i) => {
-        if(p.id == req.params.id) {
+        if (p.id == req.params.id) {
             produtos.splice(i, 1, { ...req.body, carrinho: p.carrinho });
             writefile('produto', produtos);
         }
@@ -69,11 +70,17 @@ function remove(req, res) {
     const produtos = require('./produto.json');
 
     produtos.forEach((p, i) => {
-        if(p.id == req.params.id) {
+        if (p.id == req.params.id) {
             produtos.splice(i, 1);
             writefile('produto', produtos);
         }
     });
 
-    res.ok();  
+    res.ok();
+}
+
+function removeAll(req, res) {
+    writefile('carrinho', []);
+    writefile('produto', []);
+    res.ok();
 }
